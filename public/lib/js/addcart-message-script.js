@@ -1,0 +1,1 @@
+$('.addcart_massege').fadeIn().delay(2000).fadeOut();
