@@ -36,6 +36,7 @@ Route::group(['middleware' => [] , 'as' => 'frontend.'], function (){
 	Route::get('/FAQ', 'Frontend\FAQController@index')->name('faq');
 	Route::group(['prefix' => '/personal', 'as' => 'personal.'], function(){
 		Route::get('/index' , 'Frontend\PersonalController@index')->name('index');
+		Route::get('/setting' , 'Frontend\PersonalController@setting')->name('setting');
 	});
 });
 

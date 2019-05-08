@@ -11,20 +11,7 @@
     </div>
     <div class="sidebar-inner">
         {{-- sidebar-top --}}
-        @includeif('backend.layouts.slidebar-item.sidebar-top')
-        <div class="menu-title">
-            Danh sách thao tác
-            <div class="pull-right menu-settings">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-delay="300"> 
-                    <i class="icon-settings"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" id="reorder-menu" class="reorder-menu">Xắp xếp menu</a></li>
-                    <li><a href="#" id="remove-menu" class="remove-menu">Xóa danh mục</a></li>
-                    <li><a href="#" id="hide-top-sidebar" class="hide-top-sidebar">Ẩn người dùng &amp; tìm kiếm</a></li>
-                </ul>
-            </div>
-        </div>
+        {{-- @includeif('backend.layouts.slidebar-item.sidebar-top') --}}
         <ul class="nav nav-sidebar">
             <li><a href="{{ route('backend.index') }}"><i class="icon-home"></i><span>Bảng điều khiển</span></a></li>
             <li class="nav-parent {{ (in_array($route_name, ['backend.product.index','backend.product.add', 'backend.product.edit']) ? 'nav-active active' : '') }} ">

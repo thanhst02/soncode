@@ -28,9 +28,9 @@ class LoginRequest extends FormRequest
         $account = $request->account;
         $field = filter_var($account, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if ($field == 'username') {
-            $rules['account'] = 'required|in:users,username';
+            $rules['account'] = 'required|not_in:users,username';
         }else{
-            $rules['account'] = 'required|in:users,email';
+            $rules['account'] = 'required|not_in:users,email';
         }
         
         $rules['password'] = [
@@ -42,7 +42,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         $messages['account.required'] = 'Chưa nhập account!';
-        $messages['account.in'] = 'Không tồn tại tài khoản này!';
+        $messages['account.not_in'] = 'Không tồn tại tài khoản này!';
         $messages['password.required'] = 'Chưa nhập mật khẩu!';
 
         return $messages;

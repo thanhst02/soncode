@@ -13,4 +13,9 @@ class Image extends Model
 	];
     public $timestamps = false;
     protected $primary_key = 'id';
+
+    public function user()
+    {
+        return $this->hasOne( User::class, 'avatar' );
+    }
 }
