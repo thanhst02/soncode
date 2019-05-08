@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Human;
 use App\Models\Address;
 use App\Models\Phone;
-use App\Models\Image;
 
 class User extends Authenticatable
 {
@@ -21,7 +20,7 @@ class User extends Authenticatable
         'email',
         'password',
     	'human_id',
-    	'avatar',
+    	'avatar ',
     	'status', 
         'active',
         'role',
@@ -35,11 +34,6 @@ class User extends Authenticatable
         return $this->belongsTo( Human::class );
     }
 
-    // lấy avatar của tài khoản
-    public function image()
-    {
-        return $this->belongsTo( Image::class, 'avatar' );
-    }
     /**
      * Tạo người dùng mới
      *

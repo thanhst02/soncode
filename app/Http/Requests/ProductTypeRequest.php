@@ -57,13 +57,14 @@ class ProductTypeRequest extends FormRequest
                         'required',
                         Rule::in($country),
                     ];
-                    $rules['maker'] = [
-                        'required',
-                        Rule::in($maker),
-                    ]; 
+                    if (Request::has('maker')) {
+                        $rules['maker'] = [
+                            Rule::in($maker),
+                        ];
+                    }
                     $rules['description'] = 'required';
                     $rules['price'] = 'required|numeric';
-                    $rules['image'] = 'required|array|min:4';
+                    $rules['image'] = 'required|array|min:1';
                     $rules['image.*'] = 'image';
 
 
@@ -72,7 +73,28 @@ class ProductTypeRequest extends FormRequest
             case 'PUT':
             case 'PATCH':
                 {
-                    
+                    $rules['code'] = 'required|max:255';
+                    $rules['name'] = 'required|max:255';
+                    $rules['category'] = [
+                        'required',
+                        Rule::in($category),
+                    ];
+                    $rules['country'] = [
+                        'required',
+                        Rule::in($country),
+                    ];
+                    if (Request::has('maker')) {
+                        $rules['maker'] = [
+                            Rule::in($maker),
+                        ];
+                    }
+                    $rules['description'] = 'required';
+                    $rules['price'] = 'required|numeric';
+                    $rules['image'] = 'required|array|min:1';
+                    $rules['image.*'] = 'image';
+
+
+                    return $rules;
                 }
             default:
                 break;

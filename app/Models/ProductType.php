@@ -151,6 +151,7 @@ class ProductType extends Model
         ];
     }
 
+
     /**
      * =======================
      * Frontend End
@@ -168,11 +169,14 @@ class ProductType extends Model
         $name = $request->input('name');
         $category = $request->input('category');
         $country = $request->input('country');
-        $maker = $request->input('maker');
+        $maker = '';
+        if ($request->has('maker')) {
+            $maker = $request->input('maker');
+        }
         $tag = $request->input('tag');
         $description = $request->input('description');
         $images = $request->file('image');
-        $price = $request->file('price');
+        $price = $request->input('price');
 
         $id = static::insertGetId([
             'code' => $code,

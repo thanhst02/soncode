@@ -18,18 +18,18 @@ class Category extends Model
 
     public static function slidebar()
     {
-    	$products = ProductType::select('category_id')->where('status', 1)->distinct()->get();
-        $return = [];
-        foreach ($products as $product) {
+        $products = ProductType::select('category_id')->where('status', 1)->distinct()->get();
+    	$return = [];
+    	foreach ($products as $product) {
             $category = static::select('id', 'name')->where('id', $product->category_id)->first();
             $quantity = ProductType::select('id')->where('status', 1)->where('category_id', $category->id)->get()->count();
-            $return[] = [
-                'id' => $category->id,
+    		$return[] = [
+    			'id' => $category->id,
                 'name' => $category->name,
                 'quantity' => $quantity
-            ];
-        }
-        return $return;
+    		];
+    	}
+    	return $return;
     }
 
     public static function category_product()

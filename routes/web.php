@@ -28,16 +28,23 @@ Route::group(['middleware' => [] , 'as' => 'frontend.'], function (){
 	Route::get('/category/{id}', 'Frontend\IndexController@categoryFilder')->name('category-filder');
 	Route::get('/country/{id}', 'Frontend\IndexController@countryFilder')->name('country-filder');
 	Route::get('/maker/{id}', 'Frontend\IndexController@makerFilder')->name('maker-filder');
-	Route::get('/add-cart', 'Frontend\CartController@addCart')->name('add-cart');
-	Route::get('/delete-cart', 'Frontend\CartController@deleteCart')->name('delete-cart');
-	Route::get('/clear-cart', 'Frontend\CartController@clearCart')->name('clear-cart');
+	Route::get('/go-filter', 'Frontend\IndexController@goFilter')->name('go-filter');
 	Route::get('/about', 'Frontend\AboutController@index')->name('about');
 	Route::get('/comtact', 'Frontend\ContactController@index')->name('comtact');
 	Route::get('/FAQ', 'Frontend\FAQController@index')->name('faq');
+	Route::group(['prefix' => '/cart', 'as' => 'cart.'], function(){
+		Route::get('/add-cart', 'Frontend\CartController@addCart')->name('add-cart');
+		Route::get('/delete-cart', 'Frontend\CartController@deleteCart')->name('delete-cart');
+		Route::get('/clear-cart', 'Frontend\CartController@clearCart')->name('clear-cart');
+		Route::get('/', 'Frontend\CartController@viewCart')->name('view-cart');
+		Route::get('/check-out', 'Frontend\CartController@checkOut')->name('check-out');
+	});
 	Route::group(['prefix' => '/personal', 'as' => 'personal.'], function(){
 		Route::get('/index' , 'Frontend\PersonalController@index')->name('index');
-		Route::get('/setting' , 'Frontend\PersonalController@setting')->name('setting');
 	});
+	// foreach (File::allFiles(__DIR__ . '/frontend') as $route_file) {
+	// 	require_once $route_file->getPathname();
+	// }
 });
 
 /*
@@ -85,4 +92,7 @@ Route::group(['prefix' => '/dashboard', 'middleware' => ['auth'] , 'as' => 'back
 		Route::patch('/edit/{id}' , 'Backend\UserController@edit')->name('update');
 		Route::get('/delete/{id}' , 'Backend\UserController@destroy')->name('destroy');
 	});
+	// foreach (File::allFiles(__DIR__ . '/backend') as $route_file) {
+	// 	require_once $route_file->getPathname();
+	// }
 });

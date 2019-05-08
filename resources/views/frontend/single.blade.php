@@ -294,7 +294,4 @@
 	</div>
 @endsection
 @section('footer-js-bottom')
- 	<script type="text/javascript">
- 		var url_cart_add = '{{ route('frontend.add-cart') }}';
- 	</script>
 @endsection

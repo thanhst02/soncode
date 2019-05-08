@@ -66,9 +66,9 @@
     @endif
     {{-- ===== --}}
     <script type="text/javascript">
-        var clear_cart = '{{ route('frontend.clear-cart') }}';
-        var delete_cart = '{{ route('frontend.delete-cart') }}';
-        var url_cart_add = '{{ route('frontend.add-cart') }}';
+        var clear_cart = '{{ route('frontend.cart.clear-cart') }}';
+        var delete_cart = '{{ route('frontend.cart.delete-cart') }}';
+        var url_cart_add = '{{ route('frontend.cart.add-cart') }}';
     </script>
     <script type="text/javascript" src="{{ asset('lib/js/script.js') }}"></script>
 {{-- #E7512F --}}

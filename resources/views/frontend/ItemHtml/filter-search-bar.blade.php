@@ -8,12 +8,29 @@ use App\Models\Maker;
 
 <div class="widget fx" data-animate="fadeInLeft">
 	<h3 class="widget-head">Lọc sản phẩm</h3>
-	{!! Form::open(['method' => 'GET' ,'class'=> 'leave-comment contact-form', 'id' => 'filter-product']) !!}
+	{!! Form::open(['method' => 'GET' ,'class'=> 'leave-comment contact-form', 'id' => 'filter-product', 'route' => 'frontend.go-filter']) !!}
 	<div class="widget-content">
 		<ul id="accordion" class="accordion">
 			<li>
 				<h3><a href="#">Tìm kiếm cơ bản</a></h3>
 				<div class="accordion-panel active">
+					@if(isset($categories) && $categories)
+						<div class="control-group">
+							<label class="control-label">Loại sản phẩm:</label>
+							<div class="controls">
+								<div class="form-group">
+									@foreach($categories as $category)
+									<div class="col-md-12">
+										<label class="checkbox">
+											<input type="checkbox" name="category[{{ $category['id'] }}]" value="{{ $category['id'] }}" 
+											{{ Request::has('category.'.$category['id']) ? 'checked': '' }}>{{ $category['name'] }}
+										</label>
+									</div>
+									@endforeach
+								</div>
+							</div>
+						</div>
+					@endif
 					<div class="control-group">
 						<label class="control-label">Quốc gia:</label>
 						<div class="controls">
@@ -48,31 +65,15 @@ use App\Models\Maker;
 						<div class="cell-6">
 							<label class="control-label">Từ:</label>
 							<div class="controls">
-								{!! Form::text('min-price', null, ['class' => 'form-control', 'placeholder' => '$']) !!}
+								{!! Form::text('min-price', Request::get('min-price'), ['class' => 'form-control']) !!}
 							</div>
 						</div>
 						<div class="cell-6">
 							<label class="control-label">Đến:</label>
 							<div class="controls">
-								{!! Form::text('max-price', null, ['class' => 'form-control', 'placeholder' => '$']) !!}
+								{!! Form::text('max-price', Request::get('max-price'), ['class' => 'form-control']) !!}
 							</div>
 						</div>
-					</div>
-				</div>
-			</li>
-			<li>
-				<h3><a href="#">Sự lựa chọn khác:</a></h3>
-				<div class="accordion-panel active">
-					<div class="control-group">
-						<label class="checkbox">
-							<input type="checkbox">Sản phẩm mới
-						</label>
-						<label class="checkbox">
-							<input type="checkbox">Siêu giảm giá
-						</label>
-						<label class="checkbox">
-							<input type="checkbox">Top tìm kiếm
-						</label>
 					</div>
 				</div>
 			</li>

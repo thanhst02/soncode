@@ -30,7 +30,7 @@ class CountryRequest extends FormRequest
                 $rules['country_code'] = 'required|unique:countries,country_code';
             }
             case 'PUT':
-            case 'PATCH':{
+            case 'PATCH': {
                 $rules['name'] = 'required';
                 $rules['iso_code'] = 'required';
                 $rules['country_code'] = 'required';

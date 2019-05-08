@@ -53,5 +53,5 @@ class ProductController extends Controller
     	$categories = Category::slidebar();
     	return view('frontend.product',
     	compact('title', 'categories', 'product_types', 'products_data'));
-    }
+	}
 }

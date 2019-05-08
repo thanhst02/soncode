@@ -12,13 +12,13 @@ class CartController extends Controller
     public function addCart(Request $request)
     {
 
-        if ($request->get('type')) {
+        if ($request->get('type') == 1) {
            $id = $request->get('id');
             $quantity = $request->get('quantity');
             if (!ProductType::find($id)) {
                 abort(404);
             }
-            $product_type = ProductType::select('id', 'name')->where('id', $id)->first();
+            $product_type = ProductType::select('id', 'name', 'price', 'sale')->where('id', $id)->first();
             $image = ProductType::getImage($id);
             if (!$request->session()->has('session_cart.'.$id)) {
                 $request->session()->put('session_cart.'.$id, [
@@ -36,6 +36,12 @@ class CartController extends Controller
                 $request->session()->put('session_cart.'.$id.'.quantity', $new_quantity);
             }
         };
+
+        if ($request->get('type') == 2) {
+            $id = $request->get('id');
+            $quantity = $request->get('quantity');
+            $request->session()->put('session_cart.'.$id.'.quantity', $quantity);
+        }
     	$data = $request->session()->get('session_cart');
     	return $data;
     }
@@ -52,8 +58,13 @@ class CartController extends Controller
     	$request->session()->forget('session_cart');
     }
 
-    public function viewCart($value='')
+    public function viewCart()
     {
-        # code...
+        return view('frontend.cart');
+    }
+
+    public function checkOut()
+    {
+        return view('frontend.cart.check-out');
     }
 }

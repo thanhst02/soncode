@@ -44,7 +44,7 @@ use Illuminate\Support\Facades\Request;
 										<input type="hidden" value="{{ $keywork }}" name="keywork">
 									@endif
 									<div class="left">
-										<span>Xắp xếp: </span>
+										<span>Lọc: </span>
 										<select name="order-type">
 											<option value="date" {{ Request::get('order-type') == 'date' ? 'selected': ''}}>Theo ngày</option>
 											<option value="price" {{ Request::get('order-type') == 'price' ? 'selected': ''}}>Theo giá</option>
@@ -60,7 +60,7 @@ use Illuminate\Support\Facades\Request;
 										</select>
 									</div>
 									<div class="left">
-										<span>Hiển thị: </span>
+										<span>Xắp xếp: </span>
 										<select name="order">
 											<option value="asc" {{ Request::get('order') == 'asc' ? 'selected': ''}}>Tăng dần</option>
 											<option value="desc" {{ Request::get('order') == 'desc' ? 'selected': ''}}>Giảm dần</option>
@@ -76,7 +76,7 @@ use Illuminate\Support\Facades\Request;
 						</div>
 						<div class="clearfix"></div>
 						@if(isset($products_data) && $products_data)
-						<div class="grid-list">
+						<div id="product-content" class="grid-list">
 							@php
 								$index = 0;
 								$mumber_cols = 2;
@@ -101,13 +101,13 @@ use Illuminate\Support\Facades\Request;
 													$rate = $product['rate'];
 												@endphp
 												@includeif('frontend.ItemHtml.review')
-												<div class="item-price">{{ number_format($product['price']) }} vnd</div>
+												<div class="item-price">{{ number_format($product['price']) }}</div>
 			                            	</div>
 											<div class="left">
 												<div class="item-cart">
 													<input class="product-quantity" type="hidden" value="1">
 													<input class="product-id" type="hidden" value="{{ $product['id'] }}">
-													<a class="add-cart"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+													<a class="add-cart"><i class="fa fa-shopping-cart"></i> Thêm giỏ hàng</a>
 												</div>
 	                                            <div class="item-tools">
 		                                            <a href="#"><i class="fa fa-heart" data-title="Add to Favourites" data-tooltip="true"></i></a>
@@ -117,13 +117,13 @@ use Illuminate\Support\Facades\Request;
 				    					</div>
 				    				</div>
 				    			</div>
-				    			@if($index != 0 && $index%$mumber_cols == 0)
-				    			<div class="clearfix"></div>
-				    			@endif
-								@php
-									$index ++;
-								@endphp
 							</div>
+							@if($index != 0 && $index%$mumber_cols == 0)
+								<div class="clearfix"></div>
+							@endif
+							@php
+								$index ++;
+							@endphp
 							@endforeach
 						</div>
 						<div class="clearfix"></div>
@@ -141,6 +141,14 @@ use Illuminate\Support\Facades\Request;
 		</div>
 	</div>
 @endsection
-@section('footer-js-bottom')
-	
+@section('footer-js-top')
+	@if(Route::currentRouteName() == 'frontend.go-filter')
+		<script>
+			var url_filter = '{{ Request::getRequestUri() }}';
+		</script>
+	@else
+		<script>
+			var url_filter = '';
+		</script>
+	@endif
 @endsection
